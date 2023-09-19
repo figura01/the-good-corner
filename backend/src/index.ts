@@ -71,7 +71,6 @@ app.patch("/ad/:id", (req: Request, res: Response) => {
 });
 
 app.delete("/ad/:id", (req: Request, res: Response) => {
-    console.log("delete")
     const idOfAd = parseInt(req.params.id, 10);
     const existedAd = ads.find(ad => ad.id === idOfAd);
     if(existedAd) {
