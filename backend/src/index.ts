@@ -49,21 +49,41 @@ app.post("/ad", (req: Request, res: Response) => {
 });
 
 app.patch("/ad/:id", (req: Request, res: Response) => {
-    console.log(req.params)
-    console.log("update")
-    ads = ads.map((ad) => {
-        if(ad.id === parseInt(req.params.id, 10)) {
-            return {
-                ...ad,
-                ...req.body
-            }
-        } 
-        return ad
-    })
-    console.log('--------', ads)
-    res.status(204).send("Ad is successfully updated !");
+    const idOfAd = parseInt(req.params.id, 10);
+    const existedAd = ads.find(ad => ad.id === idOfAd);
+
+    if(existedAd) {
+        // existe
+        ads = ads.map((ad) => {
+            if(ad.id === idOfAd) {
+                return {
+                    ...ad,
+                    ...req.body
+                }
+            } 
+            return ad
+        });
+        res.status(200).send("Ad have successfully updated !")
+    }else {
+        // not existe
+        res.status(200).send("Error can't update this Ad")
+    }
 });
-  
+
+app.delete("/ad/:id", (req: Request, res: Response) => {
+    console.log("delete")
+    const idOfAd = parseInt(req.params.id, 10);
+    const existedAd = ads.find(ad => ad.id === idOfAd);
+    if(existedAd) {
+        // existe ad
+        ads = ads.filter(ad => ad.id !== idOfAd);
+        res.status(200).send( "Ad is successfully deleted !")
+    } else {
+        // not existe ad
+        res.status(404).send( "Error can't delete this ad !")
+    }
+})
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
