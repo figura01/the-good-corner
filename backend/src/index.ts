@@ -40,13 +40,11 @@ app.get("/ad", (req: Request, res: Response) => {
 app.post("/ad", (req: Request, res: Response) => {
     const id = ads.length + 1
     const createdAt = new Date().toISOString().toString();
-    console.log('------- ceated at ------', createdAt)
     ads.push({
         ...req.body, 
         id, 
         createdAt
     });
-    console.log('----- new ads --------', ads)
     res.send("Request received, check the backend terminal");
 });
   
