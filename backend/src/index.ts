@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 app.use(express.json())
 
-const ads: Ad[] = [
+let ads: Ad[] = [
     {
       id: 1,
       title: "Bike to sell",
@@ -45,7 +45,23 @@ app.post("/ad", (req: Request, res: Response) => {
         id, 
         createdAt
     });
-    res.send("Request received, check the backend terminal");
+    res.status(200).send("Request received, check the backend terminal");
+});
+
+app.patch("/ad/:id", (req: Request, res: Response) => {
+    console.log(req.params)
+    console.log("update")
+    ads = ads.map((ad) => {
+        if(ad.id === parseInt(req.params.id, 10)) {
+            return {
+                ...ad,
+                ...req.body
+            }
+        } 
+        return ad
+    })
+    console.log('--------', ads)
+    res.status(204).send("Ad is successfully updated !");
 });
   
 app.listen(port, () => {

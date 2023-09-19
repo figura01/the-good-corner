@@ -14,3 +14,12 @@ Content-Type: application/json
     "location": "Paris",
     "createdAt": "2023-10-05T10:14:15.922Z"
 }
+
+###
+
+PATCH http://localhost:3000/ad/1 
+Content-Type: application/json
+
+{
+    "title":"Macbook Air M2" 
+}
