@@ -2,7 +2,7 @@
   "name": "the-good-corner-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "start": "ts-node ./src/index.ts"
   },

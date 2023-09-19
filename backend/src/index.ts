@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
+import {Ad} from "./utils/types";
 
 const app = express();
 const port = 3000;
 app.use(express.json())
 
-const ads = [
+const ads: Ad[] = [
     {
       id: 1,
       title: "Bike to sell",
@@ -31,8 +32,22 @@ const ads = [
     },
   ];
 
-app.get("/", (req: Request, res: Response) => {
-res.send("Hello World!");
+app.get("/ad", (req: Request, res: Response) => {
+    console.log(ads)
+    res.send(ads);
+});
+
+app.post("/ad", (req: Request, res: Response) => {
+    const id = ads.length + 1
+    const createdAt = new Date().toISOString().toString();
+    console.log('------- ceated at ------', createdAt)
+    ads.push({
+        ...req.body, 
+        id, 
+        createdAt
+    });
+    console.log('----- new ads --------', ads)
+    res.send("Request received, check the backend terminal");
 });
   
 app.listen(port, () => {
