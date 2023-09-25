@@ -1,0 +1,30 @@
+GET http://localhost:3000/ad
+###
+
+POST http://localhost:3000/ad
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title": "Bike to sell",
+    "description": "My bike is blue, working fine. I'm selling it because I've got a new one",
+    "owner": "bike.seller@gmail.com",
+    "price": 100,
+    "picture": "https://www.canyon.com/dw/image/v2/BCML_PRD/on/demandware.static/-/Sites-canyon-master/default/dw595a3e1a/images/full/full_2023_/2023/full_2023_3954_aeroad-cf-slx-8-disc-etap_P09_P5.jpg?sw=1300&sfrm=png&q=90&bgcolor=F2F2F2",
+    "location": "Paris",
+    "createdAt": "2023-10-05T10:14:15.922Z"
+}
+
+###
+
+PATCH http://localhost:3000/ad/1 
+Content-Type: application/json
+
+{
+    "title":"Macbook Air M2" 
+}
+
+###
+
+DELETE http://localhost:3000/ad/2
+Content-Type: application/json
