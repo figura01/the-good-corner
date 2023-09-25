@@ -6,26 +6,16 @@ import { Ad } from "./entities/ad";
 import { Category } from "./entities/category";
 import { Tag } from "./entities/tag";
 import { In, Like } from "typeorm";
-import categoryRouter from './routes/categories'
+import categoryRouter from './routes/categories';
+import tagRouter from './routes/tags';
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use("/categories", categoryRouter);
+app.use("/tags", tagRouter);
 
-app.get("/tags", async (req: Request, res: Response) => {
-  try {
-    const { name } = req.query;
-    const tags = await Tag.find({
-      where: { name: name ? Like(`%${name}%`) : undefined },
-    });
-    res.send(tags);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
-});
 
 // app.get("/categories", async (req: Request, res: Response) => {
 //   try {
@@ -78,17 +68,7 @@ app.post("/ads", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/tags", async (req: Request, res: Response) => {
-  try {
-    const newTag = Tag.create(req.body);
-    const errors = await validate(newTag);
-    if (errors.length !== 0) return res.status(422).send({ errors });
-    res.send(await newTag.save());
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
-});
+
 
 app.delete("/ads/:id", async (req: Request, res: Response) => {
   try {
@@ -102,19 +82,7 @@ app.delete("/ads/:id", async (req: Request, res: Response) => {
   }
 });
 
-app.delete("/tags/:id", async (req: Request, res: Response) => {
-  try {
-    const tagToDelete = await Tag.findOneBy({
-      id: parseInt(req.params.id, 10),
-    });
-    if (!tagToDelete) return res.sendStatus(404);
-    await tagToDelete.remove();
-    res.sendStatus(204);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
-});
+
 
 app.patch("/ads/:id", async (req: Request, res: Response) => {
   try {
