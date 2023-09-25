@@ -5,7 +5,7 @@ import {
   BaseEntity,
   ManyToMany,
 } from "typeorm";
-import { Ad } from "./ad";
+import { Ad } from "./ad.entity";
 import { Length } from "class-validator";
 
 @Entity()

@@ -5,7 +5,7 @@ import {
   BaseEntity,
   OneToMany,
 } from "typeorm";
-import { Ad } from "./ad";
+import { Ad } from "./ad.entity";
 
 @Entity()
 export class Category extends BaseEntity {
