@@ -41,7 +41,7 @@ export class Ad extends BaseEntity {
   createdAt: string;
 
   @ManyToOne(() => Category, (c) => c.ads, {
-    cascade: true,
+    // cascade: true,
     onDelete: "CASCADE",
   })
   category: Category;

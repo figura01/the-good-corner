@@ -26,6 +26,14 @@ router.post("/create", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/find/:id", async (_, res: Response) => {});
+router.get("/find/:id", async (req: Request, res: Response) => {
+  console.log("route categories/find/:id");
+  try {
+    res.send("toto")
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
 
 export default router;

@@ -1,0 +1,38 @@
+
+
+.card-ad {
+    display:flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: 2px 2px 4px rgba(0,0,0,.3);
+    border-radius: 3px;
+    width: 200px;
+    padding: .5rem;
+}
+
+.card-ad_title {
+    font-size: 1rem;
+}
+
+.card-ad_img {
+    width: 100%;
+    height: auto;
+}
+
+.card-ad_inner {
+
+}
+
+.card-ad_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-ad_button-add {
+    color: white;
+    background: var(--color-orange);
+    border:0;
+    border-radius: 3px;
+    padding: .7rem 1rem;
+}

@@ -12,11 +12,13 @@ export default class CategoryService{
         this.db = datasource.getRepository(Category)
     }
     async list() {
-        const categories = await Category.find({
+        const categories = await this.db.find({
             relations: {
-                ads: true,
+              ads: true,
             },
         });
+      
+        return categories;
     }
 
     async create({ name }: ICreateCategory) {
@@ -25,5 +27,7 @@ export default class CategoryService{
         return await newCategory.save()
     }
 
-    find() {}
+    async find(id: number) {
+        return await this.db.findOneBy({id})
+    }
 }
