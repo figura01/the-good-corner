@@ -7,7 +7,9 @@
 .headerPage {
     background-color: white;
     padding: 1rem;
-    height: 6rem;
+    min-height: 6rem;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .app {
