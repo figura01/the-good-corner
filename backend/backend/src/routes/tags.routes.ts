@@ -4,8 +4,6 @@ import { Like } from "typeorm";
 import { Tag } from "../entities/tag.entity";
 import TagService from "../services/tag.service";
 import { ICreateTag, IListTag } from "../types/tag";
-import { formatedErrors } from "../lib/utilities";
-import { IError } from "../types/error";
 const router = Router();
 
 router.get("/list", async (req: Request, res: Response) => {
@@ -22,20 +20,11 @@ router.get("/list", async (req: Request, res: Response) => {
 router.post("/create", async (req: Request, res: Response) => {
   try {
     // const data = req.body as ICreateTag;
-    if(req.body.name) {
-      const existeTag = await new TagService().findByName(req.body.name);
-      if(existeTag) {
-        let err = { name: "TypeORMError", message: "Ce nom est déjà utiliser en db"};
-        console.log(formatedErrors(err))
-        return res.status(411).json(formatedErrors(err));
-      }
-      const data: ICreateTag = req.body;
-      const newTag = new TagService().create({ ...data });
-      const errors = await validate(newTag);
-      if (errors.length !== 0) return res.status(422).send({ errors });
-      res.send(newTag);
-    }
-    
+    const data: ICreateTag = req.body;
+    const newTag = new TagService().create({ ...data });
+    const errors = await validate(newTag);
+    if (errors.length !== 0) return res.status(422).send({ errors });
+    res.send(newTag);
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

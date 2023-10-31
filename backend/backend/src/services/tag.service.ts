@@ -32,15 +32,4 @@ export default class TagService {
 
     return tagToDelete;
   }
-
-  async findByName(name: string) {
-    const tagTofind = await this.db.findOneBy({
-      name,
-    });
-    if (!tagTofind) {
-      throw new Error("Ce tag n'existe pas");
-    }
-
-    return tagTofind;
-  }
 }
