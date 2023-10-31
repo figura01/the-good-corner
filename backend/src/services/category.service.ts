@@ -30,4 +30,16 @@ export default class CategoryService{
     async find(id: number) {
         return await this.db.findOneBy({id})
     }
+
+    async delete(id: number) {
+        const categoryToDelete = await this.db.findOneBy({
+          id,
+        });
+        if (!categoryToDelete) {
+          throw new Error("Ce categorie n'existe pas");
+        }
+        await this.db.remove(categoryToDelete);
+    
+        return categoryToDelete;
+      }
 }
