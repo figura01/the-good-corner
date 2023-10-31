@@ -2,8 +2,10 @@ import { Router, Request, Response } from "express";
 import { Ad } from "../entities/ad.entity";
 import { In } from "typeorm";
 import { validate } from "class-validator";
+import { IAdForm } from "../types/ad";
 import CategoryService from "../services/category.service";
 import AdsService from "../services/ads.service";
+import { formatedErrors } from "../lib/utilities";
 const router = Router();
 
 router.get("/list", async (req: Request, res: Response) => {
@@ -33,14 +35,14 @@ router.get("/list", async (req: Request, res: Response) => {
 
 router.post("/create", async (req: Request, res: Response) => {
   try {
-    const newAd = Ad.create(req.body);
-    const errors = await validate(newAd);
-    if (errors.length !== 0) return res.status(422).send({ errors });
-    const newAdWithId = await newAd.save();
-    res.send(newAdWithId);
-  } catch (err) {
+    const data: IAdForm = req.body;
+    // const { price, ...data }: IAdForm = req.body;
+    // const newAd = await new AdsService().create({ ...data, price: +price });
+    const newAd = await new AdsService().create(data);
+    res.send(newAd);
+  } catch (err: any) {
     console.log(err);
-    res.sendStatus(500);
+    res.status(500).json(formatedErrors(err));
   }
 });
 
@@ -81,14 +83,15 @@ router.get("/listbycategory/:id", async (req: Request, res: Response) => {
 
 router.post("/create", async (req: Request, res: Response) => {
   try {
-    const newAd = Ad.create(req.body);
-    const errors = await validate(newAd);
-    if (errors.length !== 0) return res.status(422).send({ errors });
-    const newAdWithId = await newAd.save();
-    res.send(newAdWithId);
-  } catch (err) {
+    const data: IAdForm = req.body;
+    // const { price, ...data }: IAdForm = req.body;
+    // const newAd = await new AdsService().create({ ...data, price: +price });
+    const newAd = await new AdsService().create(data);
+    console.log('newAd ====>', newAd)
+    res.send(newAd);
+  } catch (err: any) {
     console.log(err);
-    res.sendStatus(500);
+    res.status(500).json(formatedErrors(err));
   }
 });
 

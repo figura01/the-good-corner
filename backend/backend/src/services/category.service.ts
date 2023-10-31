@@ -30,4 +30,12 @@ export default class CategoryService{
     async find(id: number) {
         return await this.db.findOneBy({id})
     }
+
+    async delete(id: number) {
+        const categoryToDelete = await this.find(id);
+        if (!categoryToDelete) {
+            throw new Error("L'annonce n'existe pas!");
+        }
+        return await this.db.remove(categoryToDelete);
+    }
 }

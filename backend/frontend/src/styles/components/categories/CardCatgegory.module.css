@@ -1,0 +1,13 @@
+.card-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-right: 1rem;
+    background-color: var(--color-orange);
+    border-radius: 3px;
+}
+
+.card-category_link {
+    color: white
+}

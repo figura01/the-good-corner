@@ -1,32 +1,12 @@
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
+import { Category } from '@/types/categories';
 
 import styles from '../../styles/components/Navbar.module.css';
 const Navbar = () => {
     const [error, setError] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [categories, setCategories] = useState([
-        {
-            id:1,
-            name: 'Voitures'
-        },
-        {
-            id:2,
-            name: 'Vêtements'
-        },
-        {
-            id:3,
-            name: 'Chaussures'
-        },
-        {
-            id:4,
-            name: 'Meubles'
-        },
-        {
-            id:5,
-            name: 'Autres'
-        },
-    ])
+    const [categories, setCategories] = useState<Category[]>([])
     useEffect(() => {
         fetch('http://localhost:4000/categories/list')
         .then((response) => response.json())
@@ -50,6 +30,7 @@ const Navbar = () => {
                 {c.name}
             </Link>
         ))}
+        <Link href="/categories/list" className={styles["nav-link"]}>Voir plus</Link>
         </ul>
     </nav>
 }
