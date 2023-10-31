@@ -1,28 +1,14 @@
 import {useState, useEffect} from 'react';
 import { axiosInstance } from '@/lib/axiosInstance';
 import { Category } from '@/types/categories';
-import { IAdForm, FormEditOrCreate } from '@/types/ads';
-import { IError } from '@/types/error'
+import { IAdForm } from '@/types/ads';
 import styles from "@/styles/components/FormAd.module.module.css"
 import { useRouter } from 'next/router';
 
-export default function FormAd({ initialData }: FormEditOrCreate) {  
+export default function FormAd() {  
     const router = useRouter();
     const [categories, setCategories]= useState<Category[]>([]);
     const [formData, setFormData] = useState<IAdForm>({} as IAdForm); // important pour spread formData
-    const [errors, setErrors] = useState<IError[]>([] as IError[]);
-
-    const findError = (field: string) => {
-        if(field) {
-            const err = errors.map((err) => {
-                if(err.field === field)
-                return <p>{err.message}</p>
-            })
-            return err
-        }
-        
-    }
-
     useEffect(() => {
         axiosInstance.get<Category[]>("/categories/list")
         .then(({data}) => {
@@ -58,10 +44,7 @@ export default function FormAd({ initialData }: FormEditOrCreate) {
           console.log(data)
           router.push(`/categories/view/${data.category?.id}`);
         })
-        .catch((err) => {
-            console.log(err)
-            setErrors(err.response.data?.errors)
-        });
+        .catch((err) => console.log(err));
     }
 
     return <form onSubmit={handleSubmit}>
@@ -73,7 +56,6 @@ export default function FormAd({ initialData }: FormEditOrCreate) {
                 name="title" 
                 value={formData.title} 
                 placeholder="Un title"/>
-            {errors && findError("title")}
         </div>
 
         <div className={styles["form-group"]} >
@@ -118,7 +100,6 @@ export default function FormAd({ initialData }: FormEditOrCreate) {
                 pattern="[0-9]*"
                 value={formData.price}
             />
-            {errors && findError("price")}
         </div>
 
         <div className={styles["form-group"]} >
