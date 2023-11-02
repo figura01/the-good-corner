@@ -1,17 +1,22 @@
 import "reflect-metadata";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import typeDefs from "./typedefs";
-import resolvers from "./resolvers";
+
 import db from "./db";
-
-
-const server = new ApolloServer<{}>({
-  typeDefs,
-  resolvers,
-});
+import { buildSchema } from "type-graphql";
+import CategoryResolver from "./resolvers/category.resolver";
+import { AdResolver } from "./resolvers/ad.resolver";
 
 async function main() {
+  const schema = await buildSchema({
+    resolvers: [CategoryResolver, AdResolver],
+  });
+  const server = new ApolloServer<{}>({
+    schema,
+    // typeDefs,
+    // resolvers,
+  });
+
   const { url } = await startStandaloneServer(server, {
     listen: { port: 4000 },
     context: async ({ req, res }) => {
@@ -24,4 +29,3 @@ async function main() {
   console.log(`🚀  Server ready at: ${url}`);
 }
 main();
-

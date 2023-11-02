@@ -3,7 +3,7 @@ import { Repository } from "typeorm";
 
 import { Category } from "../entities/category.entity";
 import { validate } from "class-validator";
-import { ICreateCategory } from "../types/category";
+import { ICreateCategory, UpdateCategoryInput } from "../types/category";
 import datasource from '../db';
 
 export default class CategoryService{
@@ -28,7 +28,7 @@ export default class CategoryService{
     }
 
     async find(id: number) {
-        return await this.db.findOneBy({id})
+        return await this.db.findOne({ where: { id }, relations: { ads: true } });
     }
 
     async delete(id: number) {
@@ -41,5 +41,20 @@ export default class CategoryService{
         await this.db.remove(categoryToDelete);
     
         return categoryToDelete;
-      }
+    }
+
+    async update(id: number, data: Omit<UpdateCategoryInput, "id">) {
+        const categoryToUpdate = await this.find(id);
+        if (!categoryToUpdate) {
+          throw new Error("L'annonce n'existe pas!");
+        }
+        const categoryToSave = this.db.merge(categoryToUpdate, data as Partial<Category>);
+        const errors = await validate(categoryToSave);
+        if (errors.length !== 0) {
+          console.log(errors);
+          throw new Error("il y a eu une erreur");
+        }
+    
+        return await this.db.save(categoryToSave);
+    }
 }
