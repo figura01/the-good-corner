@@ -28,9 +28,14 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.1.6",
     "ts-node-dev": "^2.0.0",
+    "type-graphql": "^1.1.1",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
-    "@types/express": "^4.17.17"
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@parcel/watcher": "^2.3.0",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.8.10"
   }
 }
