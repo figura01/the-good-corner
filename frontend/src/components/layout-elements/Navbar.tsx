@@ -40,12 +40,12 @@ const Navbar = () => {
             setError(error.message)
         })
         .finally(() => {
-            setIsLoading(true)
+            setIsLoading(false)
         })    
     }, [])
     return <nav className={styles.nav}>
         <ul className={styles["nav-list"]}>
-        {isLoading && categories.map((c) => (
+        {isLoading && categories && categories.map((c) => (
             <Link key={`nav_link_${c.id}`} className={styles["nav-link"]} href={`/categories/view/${c.id}`}>
                 {c.name}
             </Link>

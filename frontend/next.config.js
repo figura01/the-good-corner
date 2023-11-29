@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  cache: 'no-store'
+  reactStrictMode: false,
 }
 
 module.exports = nextConfig

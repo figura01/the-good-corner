@@ -1,49 +1,42 @@
 {
-  "name": "the-good-corner",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "ts-node-dev --watch ./src src/index.ts",
-    "resetDB": "ts-node-dev src/resetDb.ts",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
     "generate": "graphql-codegen --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ComicScrip/the-good-corner.git"
-  },
-  "keywords": [
-    "ads"
-  ],
-  "author": "Pierre Genthon",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ComicScrip/the-good-corner/issues"
-  },
-  "homepage": "https://github.com/ComicScrip/the-good-corner#readme",
   "dependencies": {
-    "@apollo/server": "^4.9.5",
-    "@graphql-tools/load-files": "^7.0.0",
-    "@graphql-tools/merge": "^9.0.0",
-    "class-validator": "^0.14.0",
-    "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "graphql": "^16.8.1",
-    "graphql-scalars": "^1.22.4",
-    "reflect-metadata": "^0.1.13",
-    "sqlite3": "^5.1.6",
-    "ts-node-dev": "^2.0.0",
-    "type-graphql": "^2.0.0-beta.3",
-    "typeorm": "^0.3.17"
-  },
-  "devDependencies": {
+    "@apollo/client": "^3.8.6",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@graphql-codegen/cli": "^5.0.0",
     "@graphql-codegen/typescript": "^4.0.1",
-    "@graphql-codegen/typescript-resolvers": "^4.0.1",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@graphql-codegen/typescript-react-apollo": "^4.1.0",
+    "@hookform/resolvers": "^3.3.1",
+    "@mui/material": "^5.14.16",
+    "@types/node": "20.6.5",
+    "@types/react": "18.2.22",
+    "@types/react-dom": "18.2.7",
+    "axios": "^1.5.1",
+    "eslint": "8.50.0",
+    "eslint-config-next": "13.5.2",
+    "graphql": "^16.8.1",
+    "next": "13.5.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-highlight-words": "^0.20.0",
+    "react-hook-form": "^7.46.2",
+    "react-icons": "^4.12.0",
+    "typescript": "5.2.2",
+    "yup": "^1.3.1"
+  },
+  "devDependencies": {
     "@parcel/watcher": "^2.3.0",
-    "@types/cors": "^2.8.14",
-    "@types/express": "^4.17.17",
-    "@types/node": "^20.8.9",
-    "typescript": "^5.2.2"
+    "@types/react-highlight-words": "^0.16.6"
   }
 }
